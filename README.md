@@ -45,8 +45,7 @@ To be executed this command needs the following packages or commands:
             "database": {
                 "name": "example",
                 "username": "user",
-                "password": "secret",
-                "host": "localhost"
+                "password": "secret"
             }
         },
         "local": {
@@ -56,8 +55,7 @@ To be executed this command needs the following packages or commands:
             "database": {
                 "name": "example",
                 "username": "user",
-                "password": "secret",
-                "host": "localhost"
+                "password": "secret"
             }    
         }
     }
