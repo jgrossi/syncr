@@ -20,7 +20,7 @@ You'll have the following files and folders:
 
 - `public/`: directory where you should put your public files (PHP, CSS, JS, etc)
 - `LICENCE`: licence file
-- `README`: README file
+- `README.md`: README file
 - `syncr.json`: the configuration file (change it with your information)
 - `syncr.php`: the PHP command to be executed
 
