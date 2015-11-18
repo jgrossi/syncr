@@ -17,7 +17,7 @@ Just clone this repository inside your project root.
 
 You'll have 2 files:
 
-- `syncr.json`: the configuration file
+- `syncr.json`: the configuration file (change it with your information)
 - `syncr.php`: the PHP command to be executed
 
 ## Requirements
