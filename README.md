@@ -6,8 +6,9 @@ Basically the command synchronize files using rsync, both local to remote and re
 
 You can sync MySQL database too. The command create a SQL file, transfer between servers and import into MySQL database, removing the generated SQL file.
 
-- *This project is under development.*
-- *Missing tests sending SSH password. For now working only with public key already installed.*
+You can use Syncr with password support or using private keys. If you want to set the username `password` for your SSH connection you must set it on the configuration file. Otherwise let `password` empty to use private keys.
+
+*This project is under development.*
 
 ## Installation
 
@@ -24,12 +25,12 @@ You'll have 2 files:
 
 To be executed this command needs the following packages or commands:
 
-- `rsync`
-- `ssh`
-- `sshpass`
-- `mysqldump`
-- `gzip`
-- `scp`
+- `rsync`: to sync files between servers using SSH
+- `ssh`: to connect to the remote server
+- `sshpass`: to send password using the command line with SSH command
+- `mysqldump`: to create a backup of your MySQL database - remote or local
+- `gzip`: to compress the SQL to improve the performance of the transfer process
+- `scp`: to copy files between local and remote servers
 
 ## The configuration file `syncr.json`
 
