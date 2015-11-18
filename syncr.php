@@ -116,7 +116,7 @@ echo "---> Synchonization finished.\n";
 
 
 /**
- * Functions
+ * Synchronization functions
  */
 
 function sync_files($config, $direction = ' up')
@@ -199,13 +199,13 @@ function sync_database_up($config)
     }
 
     echo "---> Importing database into remove server...\n";
-    $command = <<<SSH
+    $command = <<<COMMAND
 {$sshpass}ssh -q -t -p $ssh_port $username@$host << ENDSSH
 gzip -d $filename.sql.gz
 mysql -u$db_username -p$db_password $db_name < $filename.sql
 rm $filename.sql
 ENDSSH
-SSH;
+COMMAND;
     exec($command);
 }
 
@@ -300,6 +300,6 @@ function command_exists($command)
 {
     $return = shell_exec("which $command");
 
-    return ! empty($return);
+    return !empty($return);
 }
 
