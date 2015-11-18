@@ -1,6 +1,15 @@
 #!/usr/bin/env php
 <?php 
 
+/*
+   +----------------------------------------------------------------------+
+   | Syncr - Easy files and MySQL databases synchronization with PHP      |
+   +----------------------------------------------------------------------+
+   | Copyright (c) 2015 Junior Grossi                                     |
+   | Authors: Junior Grossi <juniorgro@gmail.com>                         |
+   +----------------------------------------------------------------------+
+ */
+
 namespace syncr;
 
 /**
