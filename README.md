@@ -16,9 +16,9 @@ Just clone this repository inside your project root.
 
     git clone https://github.com/jgrossi/syncr.git .
 
-You'll have the following files:
+You'll have the following files and folders:
 
-- `public`: directory where you should put your public files (PHP, CSS, JS, etc)
+- `public/`: directory where you should put your public files (PHP, CSS, JS, etc)
 - `LICENCE`: licence file
 - `README`: README file
 - `syncr.json`: the configuration file (change it with your information)
