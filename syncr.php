@@ -279,7 +279,7 @@ function config_is_valid($config)
         isset($config['local']['database']) and 
         isset($config['local']['database']['name']) and 
         isset($config['local']['database']['username']) and 
-        isset($config['local']['database']['password']) and 
+        isset($config['local']['database']['password'])
 }
 
 function commands_check()
