@@ -1,6 +1,6 @@
 # Syncr
 
-Syncr is a very simple PHP command to simplify the synchronization process between servers using PHP and MySQL.
+Syncr is a very simple PHP command to simplify the synchronization process between servers using PHP and MySQL. It's very useful to send and get files and MySQL databases for Wordpress projects, for example. With just one command you can send files and the entire database to your production server, and vice versa, updating your local server with the remote database and projects files.
 
 Basically the command synchronize files using rsync, both local to remote and remote to local. 
 
