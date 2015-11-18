@@ -182,7 +182,8 @@ function sync_database_up($config)
     $username = $config['remote']['server']['username'];
     $password = $config['remote']['server']['password'];
     $host = $config['remote']['server']['host'];
-    $command = 'scp ./%s.sql.gz %s@%s:%s.sql.gz';
+    $ssh_port = $config['remote']['server']['ssh_port'];
+    $command = 'scp -P $ssh_port ./%s.sql.gz %s@%s:%s.sql.gz';
     $command = sprintf($command, $filename, $username, $host, $filename);
     echo "---> Copying local SQL file to remote server...\n";
     echo shell_exec($command);
@@ -192,14 +193,14 @@ function sync_database_up($config)
     $db_username = $config['remote']['database']['username'];
     $db_password = $config['remote']['database']['password'];
     $db_name = $config['remote']['database']['name'];
-
+    
     if ($password) {
         $sshpass = sprintf('sshpass -p "%s" ', $password);
     }
 
     echo "---> Importing database into remove server...\n";
     $command = <<<SSH
-{$sshpass}ssh -q -t $username@$host << ENDSSH
+{$sshpass}ssh -q -t -p $ssh_port $username@$host << ENDSSH
 gzip -d $filename.sql.gz
 mysql -u$db_username -p$db_password $db_name < $filename.sql
 rm $filename.sql
@@ -213,6 +214,7 @@ function sync_database_down($config)
     $username = $config['remote']['server']['username'];
     $password = $config['remote']['server']['password'];
     $host = $config['remote']['server']['host'];
+    $ssh_port = $config['remote']['server']['ssh_port'];
     $sshpass = '';
     $db_username = $config['remote']['database']['username'];
     $db_password = $config['remote']['database']['password'];
@@ -224,7 +226,7 @@ function sync_database_down($config)
     }
 
     $command = <<<COMMAND
-{$sshpass}ssh -q $username@$host << ENDSSH
+{$sshpass}ssh -q -p $ssh_port $username@$host << ENDSSH
 mysqldump -u$db_username -p$db_password $db_name > $filename.sql
 gzip $filename.sql
 ENDSSH
@@ -234,7 +236,7 @@ COMMAND;
     exec($command);
 
     $command = <<<COMMAND
-{$sshpass}scp $username@$host:{$filename}.sql.gz ./
+{$sshpass}scp -P $ssh_port $username@$host:{$filename}.sql.gz ./
 gzip -d {$filename}.sql.gz
 COMMAND;
 
@@ -251,7 +253,7 @@ COMMAND;
 
     $command = <<<COMMAND
 rm $filename.sql
-{$sshpass}ssh -q $username@$host << ENDSSH
+{$sshpass}ssh -q -p $ssh_port $username@$host << ENDSSH
 rm $filename.sql.gz
 ENDSSH
 COMMAND;
@@ -279,7 +281,7 @@ function config_is_valid($config)
         isset($config['local']['database']) and 
         isset($config['local']['database']['name']) and 
         isset($config['local']['database']['username']) and 
-        isset($config['local']['database']['password'])
+        isset($config['local']['database']['password']);
 }
 
 function commands_check()
