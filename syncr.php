@@ -273,7 +273,6 @@ function config_is_valid($config)
         isset($config['remote']['database']['name']) and 
         isset($config['remote']['database']['username']) and 
         isset($config['remote']['database']['password']) and 
-        isset($config['remote']['database']['host']) and 
         isset($config['local']) and 
         isset($config['local']['server']) and 
         isset($config['local']['server']['path']) and 
@@ -281,14 +280,13 @@ function config_is_valid($config)
         isset($config['local']['database']['name']) and 
         isset($config['local']['database']['username']) and 
         isset($config['local']['database']['password']) and 
-        isset($config['local']['database']['host']);
 }
 
 function commands_check()
 {
     $commands = array('rsync', 'ssh', 'sshpass', 'mysqldump', 'gzip', 'scp');
     foreach ($commands as $command) {
-        if (! command_exists($command)) {
+        if (!command_exists($command)) {
             return false;
         }
     }

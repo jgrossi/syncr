@@ -10,8 +10,7 @@
         "database": {
             "name": "example",
             "username": "user",
-            "password": "secret",
-            "host": "localhost"
+            "password": "secret"
         }
     },
     "local": {
@@ -21,8 +20,7 @@
         "database": {
             "name": "example",
             "username": "user",
-            "password": "secret",
-            "host": "localhost"
+            "password": "secret"
         }    
     }
 }
