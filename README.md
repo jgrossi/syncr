@@ -2,6 +2,10 @@
 
 Syncr is a very simple PHP command to simplify the synchronization process between servers using PHP and MySQL.
 
+Basically the command synchronize files using rsync, both local to remote and remote to local. 
+
+You can sync MySQL database too. The command create a SQL file, transfer between servers and import into MySQL database, removing the generated SQL file.
+
 - *This project is under development.*
 - *Missing tests sending SSH password. For now working only with public key already installed.*
 
