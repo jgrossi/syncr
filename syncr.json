@@ -1,0 +1,28 @@
+{
+    "remote": {
+        "server": {
+            "host": "example.com",
+            "username": "user",
+            "password": "secret",
+            "ssh_port": 22,
+            "path": "./example.com/public/"
+        },
+        "database": {
+            "name": "example",
+            "username": "user",
+            "password": "secret",
+            "host": "localhost"
+        }
+    },
+    "local": {
+        "server": {
+            "path": "./public/"
+        },
+        "database": {
+            "name": "example",
+            "username": "user",
+            "password": "secret",
+            "host": "localhost"
+        }    
+    }
+}
