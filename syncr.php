@@ -11,7 +11,7 @@ $options = getopt('', array('up', 'down', 'database', 'help'));
  * Check if --help option exists in the command
  */
 if (isset($options['help'])) {
-    echo <<<HELP
+    echo <<<MESSAGE
 
 Synopsis:
     php syncr [options]
@@ -21,7 +21,7 @@ Options:
     --database  Synchronize also the MySQL database
 
 
-HELP;
+MESSAGE;
     exit();
 }
 
@@ -29,7 +29,7 @@ HELP;
  * Check for the synchronization direction (up or down)
  */
 if (!isset($options['up']) and !isset($options['down'])) {
-    echo <<<UP_DOWN_MISSING
+    echo <<<MESSAGE
     
 +-----------------------------------------------------------+
 |                       ! ERROR !                           |
@@ -37,7 +37,7 @@ if (!isset($options['up']) and !isset($options['down'])) {
 | synchronization process.                                  |
 +-----------------------------------------------------------+
 
-UP_DOWN_MISSING;
+MESSAGE;
     exit();
 } else {
     if (isset($options['up'])) {
@@ -59,7 +59,7 @@ if (file_exists(__DIR__.'/'.$file)) {
     $json = file_get_contents(__DIR__.'/'.$file);
     $config = json_decode($json, true);
 } else {
-    echo <<<NO_CONFIG_FILE_ERROR
+    echo <<<MESSAGE
 
 +-----------------------------------------------------------+
 |                       ! ERROR !                           |
@@ -68,7 +68,7 @@ if (file_exists(__DIR__.'/'.$file)) {
 | configurations variables.                                 |
 +-----------------------------------------------------------+
 
-NO_CONFIG_FILE_ERROR;
+MESSAGE;
     exit();
 }
 
@@ -76,7 +76,7 @@ NO_CONFIG_FILE_ERROR;
  * Check if the config file is valid
  */
 if (!config_is_valid($config)) {
-    echo <<<MISSING_CONFIG_ERROR
+    echo <<<MESSAGE
     
 +-----------------------------------------------------------+
 |                       ! ERROR !                           |
@@ -84,7 +84,7 @@ if (!config_is_valid($config)) {
 | variables.                                                |
 +-----------------------------------------------------------+
 
-MISSING_CONFIG_ERROR;
+MESSAGE;
     exit();
 }
 
@@ -92,7 +92,7 @@ MISSING_CONFIG_ERROR;
  * Check if all commands exist
  */
 if (!commands_check()) {
-    echo <<<SSH_COMMANDS
+    echo <<<MESSAGE
     
 +-----------------------------------------------------------+
 |                       ! ERROR !                           |
@@ -101,7 +101,7 @@ if (!commands_check()) {
 | scp.                                                      |
 +-----------------------------------------------------------+
 
-SSH_COMMANDS;
+MESSAGE;
     exit();
 }
 
