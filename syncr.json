@@ -11,7 +11,11 @@
             "name": "example",
             "username": "user",
             "password": "secret"
-        }
+        },
+        "ignore_from_local": [
+            "password.php", 
+            "local.ini"
+        ]
     },
     "local": {
         "server": {
@@ -21,6 +25,11 @@
             "name": "example",
             "username": "user",
             "password": "secret"
-        }    
+        },
+        "ignore_from_remote": [
+            "*.ini", 
+            "public/uploads/",
+            "*.html"
+        ]   
     }
 }
