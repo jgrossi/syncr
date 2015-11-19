@@ -14,7 +14,9 @@ You can use Syncr with password support or using private keys. If you want to se
 
 Just clone this repository inside your project root.
 
-    git clone https://github.com/jgrossi/syncr.git .
+```bash
+git clone https://github.com/jgrossi/syncr.git .
+```
 
 You'll have the following files and folders:
 
