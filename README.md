@@ -38,7 +38,8 @@ To be executed this command needs the following packages or commands:
 ## The configuration file `syncr.json`
 
 Below you have a `syncr.json` sample file. Change the file content to your needs.
-
+    
+    ```json
     {
         "remote": {
             "server": {
@@ -74,6 +75,7 @@ Below you have a `syncr.json` sample file. Change the file content to your needs
             ]
         }
     }
+    ```
 
 ## Synchronizing files between servers
 
@@ -92,9 +94,11 @@ You can setup rules to ignore files when uploading or downloading. Just set the 
 ## Synchronizing MySQL databases
 
 Syncr can dump the local or remote MySQL database and import to your local or remote MySQL. Just include `--database` in the command:
-
+    
+    ```bash
     php syncr.php --up --database
     php syncr.php --down --database
+    ```
 
 ## Global `syncr` command
 
