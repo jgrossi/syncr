@@ -122,7 +122,7 @@ sync_files($config, $direction);
 if ($sync_database) {
     sync_database($config, $direction);
 }
-echo "---> Synchonization finished.\n";
+echo "---> Synchronization finished.\n";
 
 
 /**
@@ -140,24 +140,25 @@ function sync_files($config, $direction = ' up')
     $host = $remote['host'];
     $remote_path = trim($remote['path'], '/').'/';
     $remote_string = $username.'@'.$host.':'.$remote_path;
+    $exclude = exclude_files_command($config, $direction);
 
     if ($direction == 'up') {
         echo "---> Sending files to remote server...\n";
         if ($password) {
-            $command = 'sshpass -p "%s" rsync -zavP -e "ssh -p %d" "%s" "%s"';
-            $command = sprintf($command, $password, $ssh_port, $from, $remote_string);
+            $command = 'sshpass -p "%s" rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
+            $command = sprintf($command, $password, $ssh_port, $exclude, $from, $remote_string);
         } else {
-            $command = 'rsync -zavP -e "ssh -p %d" "%s" "%s"';
-            $command = sprintf($command, $ssh_port, $from, $remote_string);
+            $command = 'rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
+            $command = sprintf($command, $ssh_port, $exclude, $from, $remote_string);
         }
     } elseif ($direction == 'down') {
         echo "---> Getting files from remote server...\n";
         if ($password) {
-            $command = 'sshpass -p "%s" rsync -zavP -e "ssh -p %d" "%s" "%s"';
-            $command = sprintf($command, $password, $ssh_port, $remote_string, $from);
+            $command = 'sshpass -p "%s" rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
+            $command = sprintf($command, $password, $ssh_port, $exclude, $remote_string, $from);
         } else {
-            $command = 'rsync -zavP -e "ssh -p %d" "%s" "%s"';
-            $command = sprintf($command, $ssh_port, $remote_string, $from);
+            $command = 'rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
+            $command = sprintf($command, $ssh_port, $exclude, $remote_string, $from);
         }
     }
 
@@ -292,6 +293,31 @@ function config_is_valid($config)
         isset($config['local']['database']['name']) and 
         isset($config['local']['database']['username']) and 
         isset($config['local']['database']['password']);
+}
+
+function exclude_files_command($config, $direction)
+{
+    if ($direction == 'up') {
+        if (isset($config['remote']['ignore_from_local'])) {
+            $files = $config['remote']['ignore_from_local'];
+        }
+    } elseif ($direction == 'down') {
+        if (isset($config['local']['ignore_from_remote'])) {
+            $files = $config['local']['ignore_from_remote'];
+        }
+    }
+
+    if (count($files) == 0) {
+        return '';
+    }
+
+    $cmd = '';
+
+    foreach ($files as $file) {
+        $cmd .= '--exclude '.$file.' ';
+    }
+
+    return trim($cmd);
 }
 
 function commands_check()
