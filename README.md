@@ -52,7 +52,11 @@ Below you have a `syncr.json` sample file. Change the file content to your needs
                 "name": "example",
                 "username": "user",
                 "password": "secret"
-            }
+            },
+            "ignore_from_local": [
+                "password.php", 
+                "local.ini"
+            ]
         },
         "local": {
             "server": {
@@ -62,7 +66,12 @@ Below you have a `syncr.json` sample file. Change the file content to your needs
                 "name": "example",
                 "username": "user",
                 "password": "secret"
-            }    
+            },
+            "ignore_from_remote": [
+                "*.ini", 
+                "public/uploads/",
+                "*.html"
+            ]
         }
     }
 
@@ -75,6 +84,10 @@ Just run this command inside your root project to synchronizing files *from loca
 Synchronizing files *from remote to local* server:
 
     php syncr.php --down
+
+### Ignoring files between the synchronization process
+
+You can setup rules to ignore files when uploading or downloading. Just set the `ignore_from_local` and `ignore_from_remote` paramaters in the configuration file `syncr.json`. You can set rules like `*.ini`, `public/uploads/`, `password*`, etc.
 
 ## Synchronizing MySQL databases
 
