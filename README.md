@@ -1,4 +1,6 @@
-# Syncr
+# syncr
+
+> One PHP command. Your files and MySQL database synchronized.
 
 Syncr is a very simple PHP command to simplify the synchronization process between servers using PHP and MySQL. It's very useful to send and get files and MySQL databases for Wordpress projects, for example. With just one command you can send files and the entire database to your production server, and vice versa, updating your local server with the remote database and project files.
 
@@ -14,7 +16,9 @@ You can use Syncr with password support or using private keys. If you want to se
 
 Just clone this repository inside your project root.
 
-    git clone https://github.com/jgrossi/syncr.git .
+```
+git clone https://github.com/jgrossi/syncr.git .
+```
 
 You'll have the following files and folders:
 
@@ -35,57 +39,63 @@ To be executed this command needs the following packages or commands:
 - `gzip`: to compress the SQL to improve the performance of the transfer process
 - `scp`: to copy files between local and remote servers
 
-## The configuration file `syncr.json`
+## Config file `syncr.json`
 
 Below you have a `syncr.json` sample file. Change the file content to your needs.
 
-    {
-        "remote": {
-            "server": {
-                "host": "example.com",
-                "username": "user",
-                "password": "secret",
-                "ssh_port": 22,
-                "path": "./example.com/public/"
-            },
-            "database": {
-                "name": "example",
-                "username": "user",
-                "password": "secret"
-            },
-            "ignore_from_local": [
-                "password.php", 
-                "local.ini"
-            ]
+```json
+{
+    "remote": {
+        "server": {
+            "host": "example.com",
+            "username": "user",
+            "password": "secret",
+            "ssh_port": 22,
+            "path": "./example.com/public/"
         },
-        "local": {
-            "server": {
-                "path": "./public/"
-            },
-            "database": {
-                "name": "example",
-                "username": "user",
-                "password": "secret"
-            },
-            "ignore_from_remote": [
-                "*.ini", 
-                "public/uploads/",
-                "*.html"
-            ]
-        }
+        "database": {
+            "name": "example",
+            "username": "user",
+            "password": "secret"
+        },
+        "ignore_from_local": [
+            "password.php", 
+            "local.ini"
+        ]
+    },
+    "local": {
+        "server": {
+            "path": "./public/"
+        },
+        "database": {
+            "name": "example",
+            "username": "user",
+            "password": "secret"
+        },
+        "ignore_from_remote": [
+            "*.ini", 
+            "public/uploads/",
+            "*.html"
+        ]
     }
+}
+```
 
-## Synchronizing files between servers
+## Synchronizing files
 
 Just run this command inside your root project to synchronizing files *from local to remote* server:
 
-    php syncr.php --up
+```bash
+php syncr.php --up
+```
 
 Synchronizing files *from remote to local* server:
 
-    php syncr.php --down
+```bash
+php syncr.php --down
+```
 
-### Ignoring files between the synchronization process
+### Ignoring files
 
 You can setup rules to ignore files when uploading or downloading. Just set the `ignore_from_local` and `ignore_from_remote` paramaters in the configuration file `syncr.json`. You can set rules like `*.ini`, `public/uploads/`, `password*`, etc.
 
@@ -93,15 +103,21 @@ You can setup rules to ignore files when uploading or downloading. Just set the 
 
 Syncr can dump the local or remote MySQL database and import to your local or remote MySQL. Just include `--database` in the command:
 
-    php syncr.php --up --database
-    php syncr.php --down --database
+```bash
+php syncr.php --up --database
+php syncr.php --down --database
+```
 
 ## Global `syncr` command
 
 You can create a global `syncr` command (Mac OSX and Linux). Just clone this repo inside some path like `~/.syncr` and create a symbolic link to `/usr/bin/syncr`:
 
-    sudo ln -s ~/.syncr/syncr.php /usr/bin/syncr
+```bash
+sudo ln -s ~/.syncr/syncr.php /usr/bin/syncr
+```
 
 After that you can just use the command inside your project root (remember you need the `syncr.json` config file), for example:
 
-    syncr --up --database
+```bash
+syncr --up --database
+```
