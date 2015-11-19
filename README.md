@@ -121,3 +121,7 @@ After that you can just use the command inside your project root (remember you n
 ```bash
 syncr --up --database
 ```
+
+## License
+
+[MIT License](http://mit-license.org/) © Junior Grossi
