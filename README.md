@@ -102,6 +102,6 @@ You can create a global `syncr` command (Mac OSX and Linux). Just clone this rep
 
     sudo ln -s ~/Code/syncr/syncr.php /usr/bin/syncr
 
-After that you can just use, for example:
+After that you can just use the command inside your project root (remember you need the `syncr.json` config file), for example:
 
     syncr --up --database
