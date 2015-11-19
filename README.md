@@ -96,4 +96,12 @@ Syncr can dump the local or remote MySQL database and import to your local or re
     php syncr.php --up --database
     php syncr.php --down --database
 
+## Global `syncr` command
 
+You can create a global `syncr` command (Mac OSX and Linux). Just clone this repo inside some path like ~/Code/syncr and create a symbolic link to `/usr/bin/syncr`:
+
+    sudo ln -s ~/Code/syncr/syncr.php /usr/bin/syncr
+
+After that you can just use, for example:
+
+    syncr --up --database
