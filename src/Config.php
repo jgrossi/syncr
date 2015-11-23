@@ -15,7 +15,7 @@ class Config
 
     public function extractContent()
     {
-        if (file_exists($this->filename)) {
+        if ($this->fileExists()) {
             $json = file_get_contents($this->filename);
             return json_decode($json, true);
         }
@@ -23,10 +23,17 @@ class Config
         return false;
     }
 
+    public function fileExists()
+    {
+        return file_exists($this->filename);
+    }
+
     public function read($server, $parameter)
     {
         if ($this->content) {
             return $this->config[$server][$parameter];
+        } else {
+            $this->extractContent();
         }
     }
 
