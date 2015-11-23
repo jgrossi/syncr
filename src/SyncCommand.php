@@ -27,7 +27,17 @@ class SyncCommand extends Command
         $configFile = $input->getOption('config');
         $database = $input->getOption('database');
 
-        $fileTransfer= new FileTransfer($direction, $config = new Config($configFile));
+        $config = new Config($configFile);
+
+        if (!$config->fileExists()) {
+            $output->writeln('<error>The config file is missing</error>');
+            exit();
+        } elseif (!$config->isValid()) {
+            $output->writeln('<error>The config file is not valid</error>');
+            exit();
+        }
+
+        $fileTransfer= new FileTransfer($direction, $config);
         $fileTransfer->process($output);
 
         if ($database) {
