@@ -30,10 +30,10 @@ class SyncCommand extends Command
         $config = new Config($configFile);
 
         if (!$config->fileExists()) {
-            $output->writeln('<error>The config file is missing</error>');
+            $output->writeln("<error>The config file <$configFile> is missing.</error>");
             exit();
         } elseif (!$config->isValid()) {
-            $output->writeln('<error>The config file is not valid</error>');
+            $output->writeln('<error>The config file is not valid. Check the documentation.</error>');
             exit();
         }
 
