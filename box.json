@@ -1,0 +1,24 @@
+{
+  "chmod": "0755",
+  "directories": [
+    "src",
+    "include"
+  ],
+  "files": [
+    "LICENSE",
+    "README.md",
+    "composer.json",
+    "composer.lock"
+  ],
+  "finder": [
+    {
+      "name": "*.php",
+      "exclude": ["Tests"],
+      "in": "vendor"
+    }
+  ],
+  "git-version": "package_version",
+  "main": "bin/syncr.php",
+  "output": "syncr.phar",
+  "stub": true
+}

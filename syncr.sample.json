@@ -1,11 +1,11 @@
 {
     "remote": {
         "server": {
-            "host": "example.com",
-            "username": "user",
-            "password": "secret",
+            "host": "zero31.com.br",
+            "username": "forge",
+            "password": "",
             "ssh_port": 22,
-            "path": "./example.com/public/"
+            "path": "./syncr/public/"
         },
         "database": {
             "name": "example",
@@ -27,9 +27,9 @@
             "password": "secret"
         },
         "ignore_from_remote": [
-            "*.ini", 
+            "production.ini", 
             "public/uploads/",
-            "*.html"
-        ]   
+            "index.html"
+        ]
     }
 }
