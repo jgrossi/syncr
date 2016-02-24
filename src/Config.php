@@ -31,7 +31,7 @@ class Config
     public function read($server, $parameter)
     {
         if ($this->content) {
-            return $this->config[$server][$parameter];
+            return $this->content[$server][$parameter];
         } else {
             $this->extractContent();
         }
