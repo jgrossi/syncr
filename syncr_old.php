@@ -125,45 +125,6 @@ if ($sync_database) {
 echo "---> Synchronization finished.\n";
 
 
-/**
- * Synchronization functions
- */
-
-function sync_files($config, $direction = ' up')
-{
-    $remote = $config['remote']['server'];
-    $local = $config['local']['server'];
-    $password = $remote['password'];
-    $ssh_port = (int) $remote['ssh_port'];
-    $from = trim($local['path'], '/').'/';
-    $username = $remote['username'];
-    $host = $remote['host'];
-    $remote_path = trim($remote['path'], '/').'/';
-    $remote_string = $username.'@'.$host.':'.$remote_path;
-    $exclude = exclude_files_command($config, $direction);
-
-    if ($direction == 'up') {
-        echo "---> Sending files to remote server...\n";
-        if ($password) {
-            $command = 'sshpass -p "%s" rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
-            $command = sprintf($command, $password, $ssh_port, $exclude, $from, $remote_string);
-        } else {
-            $command = 'rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
-            $command = sprintf($command, $ssh_port, $exclude, $from, $remote_string);
-        }
-    } elseif ($direction == 'down') {
-        echo "---> Getting files from remote server...\n";
-        if ($password) {
-            $command = 'sshpass -p "%s" rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
-            $command = sprintf($command, $password, $ssh_port, $exclude, $remote_string, $from);
-        } else {
-            $command = 'rsync -zavP -e "ssh -p %d" %s "%s" "%s"';
-            $command = sprintf($command, $ssh_port, $exclude, $remote_string, $from);
-        }
-    }
-
-    shell_exec($command);
-}
 
 function sync_database($config, $direction = 'up')
 {
@@ -174,39 +135,8 @@ function sync_database($config, $direction = 'up')
     }
 }
 
-function sync_database_up($config)
-{
-
-}
-
-function sync_database_down($config)
-{
-
-}
-
-function config_is_valid($config)
-{
-
-}
 
 
 
-function commands_check()
-{
-    $commands = array('rsync', 'ssh', 'sshpass', 'mysqldump', 'gzip', 'scp');
-    foreach ($commands as $command) {
-        if (!command_exists($command)) {
-            return false;
-        }
-    }
 
-    return true;
-}
-
-function command_exists($command) 
-{
-    $return = shell_exec("which $command");
-
-    return !empty($return);
-}
 
